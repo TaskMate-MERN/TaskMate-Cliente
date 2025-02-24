@@ -1,4 +1,4 @@
-# React + TypeScript + Vite
+# TaskMate
 
 ## Instalación de todas las librerias necesarias:
 
