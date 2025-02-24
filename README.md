@@ -1,6 +1,6 @@
 # TaskMate
 
-## Instalación de todas las librerias necesarias:
+## Instalación de todas las librerias necesarias desde la terminal:
 
 ```
 npm i
