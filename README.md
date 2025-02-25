@@ -1,4 +1,4 @@
-# TaskMate
+# TaskMate 2
 
 ## Instalación de todas las librerias necesarias desde la terminal:
 
