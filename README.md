@@ -7,11 +7,12 @@ npm i
 
 ```
 
-
--Clona estos repositorio:
-  ```sh
+-Prueba Pull Request
+-Clona estos repositorio :
+  ```
 -  git clone https://github.com/TaskMate-MERN/TaskMate-Servidor.git
 -  git clone https://github.com/TaskMate-MERN/TaskMate-Cliente.git
+
  ```
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
