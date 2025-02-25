@@ -9,7 +9,7 @@ npm i
 
 
 -Clona estos repositorio:
--   ```sh
+  ```sh
 -  git clone https://github.com/TaskMate-MERN/TaskMate-Servidor.git
 -  git clone https://github.com/TaskMate-MERN/TaskMate-Cliente.git
  ```
