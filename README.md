@@ -7,7 +7,7 @@ npm i
 
 ```
 
--Prueba Pull Request
+-Prueba de Pull Request 
 -Clona estos repositorio :
   ```
 -  git clone https://github.com/TaskMate-MERN/TaskMate-Servidor.git
