@@ -2,9 +2,17 @@
 
 ## Instalación de todas las librerias necesarias desde la terminal:
 
-```
+
 npm i
-```
+
+
+
+
+Para clonar los repositorios:
+  sh
+-  git clone https://github.com/TaskMate-MERN/TaskMate-Servidor.git
+-  git clone https://github.com/TaskMate-MERN/TaskMate-Cliente.git
+ 
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
@@ -17,9 +25,9 @@ Currently, two official plugins are available:
 
 If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-- Configure the top-level `parserOptions` property like this:
+- Configure the top-level parserOptions property like this:
 
-```js
+js
 export default tseslint.config({
   languageOptions: {
     // other options...
@@ -29,13 +37,13 @@ export default tseslint.config({
     },
   },
 })
-```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
+
+- Replace tseslint.configs.recommended to tseslint.configs.recommendedTypeChecked or tseslint.configs.strictTypeChecked
+- Optionally add ...tseslint.configs.stylisticTypeChecked
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-```js
+js
 // eslint.config.js
 import react from 'eslint-plugin-react'
 
@@ -53,4 +61,5 @@ export default tseslint.config({
     ...react.configs['jsx-runtime'].rules,
   },
 })
-```
+
+
