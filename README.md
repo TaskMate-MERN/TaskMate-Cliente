@@ -1,7 +1,7 @@
 # TaskMate
 
-## Instalación de todas las librerias necesarias desde la terminal:
-
+## Instalación de todas las librerias necesarias desde la termill:
+## Unstalación de todas las librerias necesarias desde la termill:
 ```
 npm i
 ```
@@ -54,3 +54,4 @@ export default tseslint.config({
   },
 })
 ```
+EditBYAdrianCSS
