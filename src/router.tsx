@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom"
 import { AuthLayout, MainLayout } from "./layouts"
 import { ProjectsView } from "./views/main";
 import { LoginView } from "./views/admin";
+import Login from "./components/admin/Login/Login";
 
 const router = () => {
     return (
@@ -10,6 +11,8 @@ const router = () => {
                 <Route path="/auth" element={<AuthLayout />}>
                     {/* Aqui pondran todas sus rutas del Login, Register, etc... */}
                     <Route index element={<LoginView />} />
+                    <Route path="login" element={<Login />} />
+
                 </Route>
 
                 <Route path="/" element={<MainLayout />}>
