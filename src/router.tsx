@@ -3,6 +3,7 @@ import { AuthLayout, MainLayout } from "./layouts"
 import { ProjectsView } from "./views/main";
 import { LoginView } from "./views/admin";
 import Login from "./components/admin/Login/Login";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 const router = () => {
     return (
@@ -12,6 +13,7 @@ const router = () => {
                     {/* Aqui pondran todas sus rutas del Login, Register, etc... */}
                     <Route index element={<LoginView />} />
                     <Route path="login" element={<Login />} />
+                    <Route path="dashboard" element={<Dashboard />} />
 
                 </Route>
 
