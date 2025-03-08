@@ -3,7 +3,8 @@ import { AuthLayout, MainLayout } from "./layouts"
 import { ProjectsView } from "./views/main";
 import { LoginView } from "./views/admin";
 import Login from "./components/admin/Login/Login";
-import Dashboard from "./components/admin/Dashboard/Dashboard";
+import TheDashboard from "./components/Dashboard/Dashboard";
+
 const router = () => {
     return (
         <BrowserRouter>
@@ -12,12 +13,13 @@ const router = () => {
                     {/* Aqui pondran todas sus rutas del Login, Register, etc... */}
                     <Route index element={<LoginView />} />
                     <Route path="login" element={<Login />} />
-                    <Route path="dashboard" element={<Dashboard />} />
+
 
                 </Route>
 
                 <Route path="/" element={<MainLayout />}>
                     {/* Aquí pondran todas las rutas de la app, como las vistas de los proyectos, tareas, etc... */}
+                    <Route index element={<TheDashboard />} />
                     <Route index element={<ProjectsView />} />
                 </Route>
             </Routes>
