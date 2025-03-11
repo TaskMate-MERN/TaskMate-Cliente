@@ -13,8 +13,6 @@ const router = () => {
                     {/* Aqui pondran todas sus rutas del Login, Register, etc... */}
                     <Route index element={<LoginView />} />
                     <Route path="login" element={<Login />} />
-
-
                 </Route>
 
                 <Route path="/" element={<MainLayout />}>
