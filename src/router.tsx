@@ -3,6 +3,7 @@ import { AuthLayout, MainLayout } from "./layouts"
 import Login from "./components/admin/Login/Login";
 import TheDashboard from "./components/Dashboard/Dashboard";
 
+
 const router = () => {
     return (
         <BrowserRouter>
