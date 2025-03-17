@@ -14,7 +14,7 @@ const Dashboard = () => {
     <a href="#" className="text-lg font-bold">Projects</a>
     <button className="bg-[#003e79] px-20 py-1 rounded-full font-semibold text-white 
   transition-all duration-300 ease-in-out 
-  hover:bg-[#005bb5] hover:shadow-lg 
+  hover:bg-[#0079b5d3] hover:shadow-lg 
   active:scale-95 
   hover:ring-2 hover:ring-blue-300">
   Create
