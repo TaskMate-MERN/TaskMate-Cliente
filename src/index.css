@@ -1,3 +1,12 @@
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+/* archivo styles.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Chakra UI reset */
+@layer base {
+    html {
+      @apply bg-gray-100 text-gray-900;
+    }
+  }

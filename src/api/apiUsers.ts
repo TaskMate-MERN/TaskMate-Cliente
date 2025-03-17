@@ -21,12 +21,40 @@ export const createUser = async (userData: {
     password: string;
     confirm_password: string;
 }) => {
-    const response = await api.post("/user/create-user", userData);
+    const response = await api.post("/create-user", userData);
     return response.data;
 };
 
 export const loginUser = async (credentials: { email: string; password: string }) => {
-    const response = await api.post("/login", credentials);
+    try {
+        const response = await api.post("/login", credentials);
+        return response.data; // Asegúrate de devolver la respuesta correctamente
+    } catch (error) {
+        throw error; // Propaga el error para manejarlo en el componente
+    }
+};
+export const requestAuthToken = async (email: string) => {
+    const response = await api.post("/request-auth-token", { email });
+    return response.data;
+};
+
+export const requestPasswordChange = async (email: string) => {
+    const response = await api.post("/request-password-change", { email });
+    return response.data;
+};
+
+export const confirmUser = async (token: string) => {
+    const response = await api.post("/confirm-user", { token });
+    return response.data;
+};
+
+export const confirmPasswordToken = async (token: string) => {
+    const response = await api.post("/confirm-password-token", { token });
+    return response.data;
+};
+
+export const changePassword = async (data: { token: string; password: string; confirm_password: string }) => {
+    const response = await api.post("/change-password", data);
     return response.data;
 };
 
@@ -39,4 +67,3 @@ export const fetchTasks = async (projectId: string) => {
     const response = await api.get(`/task/${projectId}`);
     return response.data;
 };
- 
