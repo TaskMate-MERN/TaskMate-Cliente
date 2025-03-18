@@ -66,13 +66,13 @@ function SignUp() {
             console.error("Error al registrar usuario:", err);
 
             if (err.response?.status === 404) {
-                if (err.response.data.code === "USER_NOT_CONFIRMED") {
-                    setError(err.response.data.message);
+              
+                    setError("El correo ya está registrado pero no confirmado. Serás redirigido al login para la confirmación.");
                     setTimeout(() => {
                         navigate("/login"); // Redirige al login después de 2 segundos
                     }, 2000);
-                }
-            } else if (err.response?.status === 409) {
+                
+            } else if (err.response?.status === 404) {
                 setError("El correo ya está registrado. Utiliza otro.");
             } else {
                 setError(err.response?.data?.message || "Error al registrar usuario.");
@@ -124,10 +124,12 @@ function SignUp() {
                 navigate("/login"); // Redirigir al login después de 2 segundos
             }, 2000);
         } catch (err: any) {
-            console.error("Error al confirmar usuario:", err);
-            setError(err.response?.data?.message || "Error al confirmar usuario.");
+            if( err.response?.status === 409){
+                setError("El token no es valido");// Mostrar mensaje de error
+          
             setToken(Array(6).fill("")); // Limpiar los campos
             inputRefs.current[0]?.focus(); // Enfocar el primer input
+            }
         } finally {
             setLoading(false);
         }
