@@ -65,14 +65,14 @@ function SignUp() {
         } catch (err: any) {
             console.error("Error al registrar usuario:", err);
 
-            if (err.response?.status === 404) {
+            if (err.response?.status === 409) {
               
-                    setError("El correo ya está registrado pero no confirmado. Serás redirigido al login para la confirmación.");
+                    setError("El correo ya está registrado . Serás redirigido al login para la confirmación.");
                     setTimeout(() => {
                         navigate("/login"); // Redirige al login después de 2 segundos
                     }, 3000);
                 
-            } else if (err.response?.status === 404) {
+            } else if (err.response?.status === 409) {
                 setError("El correo ya está registrado. Utiliza otro.");
             } else {
                 setError(err.response?.data?.message || "Error al registrar usuario.");
@@ -222,7 +222,7 @@ function SignUp() {
                             </div>
 
                             {/* Mensaje de Error */}
-                            {error && <div className="text-red-500 mt-4">{error}</div>}
+                            {error && <div className="text-green-500 mt-4">{error}</div>}
 
                             {/* Botón de Registro */}
                             <input
@@ -262,7 +262,7 @@ function SignUp() {
                             </div>
 
                             {/* Mensaje de Error */}
-                            {error && <div className="text-red-500 mt-4">{error}</div>}
+                            {error && <div className="text-green-500 mt-4">{error}</div>}
 
                             {/* Mensaje de Cuenta Verificada */}
                             {verified && (

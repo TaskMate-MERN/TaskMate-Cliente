@@ -198,7 +198,7 @@ function Login() {
                             </div>
 
                             {/* Mensaje de Error */}
-                            {error && <div className="text-red-500 mt-4">{error}</div>}
+                            {error && <div className="text-green-500 mt-4">{error}</div>}
 
                             {/* Botón Login */}
                             <input
@@ -250,7 +250,7 @@ function Login() {
         </div>
 
         {/* Mensaje de Error */}
-        {error && <div className="text-red-500 mt-4">{error}</div>}
+        {error && <div className="text-green-500 mt-4">{error}</div>}
 
         {/* Mensaje de Cuenta Verificada */}
         {verified && (
