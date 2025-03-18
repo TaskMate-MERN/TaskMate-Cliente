@@ -1,6 +1,6 @@
-import { useState,  useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { createUser, confirmUser } from "../../api/apiUsers"; // Importa las APIs
+import { createUser, confirmUser, requestAuthToken } from "../../api/apiUsers"; // Importa las APIs
 
 function SignUp() {
     const [name, setName] = useState<string>("");
@@ -9,10 +9,11 @@ function SignUp() {
     const [confirmPassword, setConfirmPassword] = useState<string>("");
     const [token, setToken] = useState<string[]>(Array(6).fill("")); // Array para los 6 dígitos
     const [error, setError] = useState<string>("");
-    const [, setSuccess] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
     const [isConfirming, setIsConfirming] = useState<boolean>(false); // Para cambiar entre registro y confirmación
     const [verified, setVerified] = useState<boolean>(false); // Estado para indicar si el token es válido
+    const [tokenSent, setTokenSent] = useState<boolean>(false); // Estado para indicar que se envió el token
+    const [, setSuccess] = useState<boolean>(false); // Estado para indicar éxito en el registro
 
     const navigate = useNavigate();
     const inputRefs = useRef<(HTMLInputElement | null)[]>(Array(6).fill(null)); // Referencias para los inputs
@@ -59,9 +60,23 @@ function SignUp() {
             console.log("Respuesta de la API:", response);
             setSuccess(true);
             setIsConfirming(true); // Cambiar a la pantalla de confirmación
+            setTokenSent(true); // Indicar que se envió el token
+            setError(""); // Limpiar errores previos
         } catch (err: any) {
             console.error("Error al registrar usuario:", err);
-            setError(err.response?.data?.message || "Error al registrar usuario.");
+
+            if (err.response?.status === 404) {
+                if (err.response.data.code === "USER_NOT_CONFIRMED") {
+                    setError(err.response.data.message);
+                    setTimeout(() => {
+                        navigate("/login"); // Redirige al login después de 2 segundos
+                    }, 2000);
+                }
+            } else if (err.response?.status === 409) {
+                setError("El correo ya está registrado. Utiliza otro.");
+            } else {
+                setError(err.response?.data?.message || "Error al registrar usuario.");
+            }
         } finally {
             setLoading(false);
         }
@@ -113,6 +128,23 @@ function SignUp() {
             setError(err.response?.data?.message || "Error al confirmar usuario.");
             setToken(Array(6).fill("")); // Limpiar los campos
             inputRefs.current[0]?.focus(); // Enfocar el primer input
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Función para solicitar un nuevo token
+    const handleResendToken = async () => {
+        setLoading(true);
+        setError("");
+
+        try {
+            await requestAuthToken(email); // Llama a la API para reenviar el token
+            setTokenSent(true); // Indicar que se envió el token
+            setError("Se ha enviado un nuevo token de confirmación a tu correo.");
+        } catch (err: any) {
+            console.error("Error al reenviar el token:", err);
+            setError("Error al reenviar el token. Inténtalo de nuevo.");
         } finally {
             setLoading(false);
         }
@@ -203,6 +235,13 @@ function SignUp() {
                     <>
                         <div className="text-2xl font-semibold">Confirmar Cuenta</div>
                         <form className="mt-4">
+                            {/* Mensaje de éxito al enviar el token */}
+                            {tokenSent && (
+                                <div className="text-green-500 mt-4">
+                                    Se ha enviado un token de confirmación a tu correo.
+                                </div>
+                            )}
+
                             {/* Token de Confirmación */}
                             <div className="flex justify-center gap-2 mt-6">
                                 {token.map((digit, index) => (
@@ -229,6 +268,16 @@ function SignUp() {
                                     ¡Cuenta verificada! Redirigiendo al login...
                                 </div>
                             )}
+
+                            {/* Botón para reenviar el token */}
+                            <button
+                                type="button"
+                                onClick={handleResendToken}
+                                disabled={loading || verified}
+                                className="cursor-pointer bg-white/20 w-full text-white rounded-md mt-6 text-lg p-2 hover:opacity-80"
+                            >
+                                {loading ? "Cargando..." : "Reenviar token de confirmación"}
+                            </button>
                         </form>
                     </>
                 )}

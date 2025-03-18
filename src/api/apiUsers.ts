@@ -62,7 +62,7 @@ export const fetchProjects = async () => {
     const response = await api.get("/project");
     return response.data;
 };
-
+ 
 export const fetchTasks = async (projectId: string) => {
     const response = await api.get(`/task/${projectId}`);
     return response.data;
