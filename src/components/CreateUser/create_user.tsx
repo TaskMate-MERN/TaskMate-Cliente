@@ -70,7 +70,7 @@ function SignUp() {
                     setError("El correo ya está registrado pero no confirmado. Serás redirigido al login para la confirmación.");
                     setTimeout(() => {
                         navigate("/login"); // Redirige al login después de 2 segundos
-                    }, 2000);
+                    }, 3000);
                 
             } else if (err.response?.status === 404) {
                 setError("El correo ya está registrado. Utiliza otro.");

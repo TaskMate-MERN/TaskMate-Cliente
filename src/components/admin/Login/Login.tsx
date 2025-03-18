@@ -63,7 +63,7 @@ function Login() {
                 setError("Credenciales incorrectas.");
             } else if (err.response?.status === 404) {
                 setError("El correo electrónico no está registrado.");
-            } else if (err.response?.status === 409 && err.response.data.code === 'USER_NOT_CONFIRMED') {
+            } else if (err.response?.status === 404 && err.response.data.code === 'USER_NOT_CONFIRMED') {
                 setError("Usuario no confirmado. Te hemos enviado un token de confirmación a tu correo.");
                 setUnconfirmedUser(true); // Mostrar el formulario de token
             } else {
