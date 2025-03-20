@@ -4,7 +4,7 @@ import Login from "./components/admin/Login/Login";
 import TheDashboard from "./components/Dashboard/Dashboard";
 import Dashboard from "./components/Dashboard_Principal/dashboard";
 import CreateUser from "./components/CreateUser/create_user";
-
+import Cambiar from "./components/Change_pass/Change_pass";
 
 const router = () => {
     return (
@@ -24,6 +24,11 @@ const router = () => {
                  <Route path="/Create" element={<AuthLayout />}>
                     {/* Aqui pondran todas sus rutas del Login, Register, etc... */}
                     <Route index element={<CreateUser />} />
+                </Route>
+
+                <Route path="/Change" element={<AuthLayout />}>
+                    {/* Aqui pondran todas sus rutas del Login, Register, etc... */}
+                    <Route index element={<Cambiar />} />
                 </Route>
 
                 <Route path="/" element={<MainLayout />}>
