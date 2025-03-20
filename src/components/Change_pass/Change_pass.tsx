@@ -51,7 +51,7 @@ function ChangePassword() {
             if (err.response?.status === 409) { // Si el usuario no está verificado
                 unverifiedUser 
                 setUnverifiedUser(true);
-                setError("Tu cuenta no está verificada. Por favor, verifica tu cuenta primero. En el login puedes confirmar ru correo");
+                setError("Tu cuenta no está verificada. Por favor, verifica tu cuenta primero. En el login puedes confirmar tu correo");
                 setLoading(false);
                 return;
             }
