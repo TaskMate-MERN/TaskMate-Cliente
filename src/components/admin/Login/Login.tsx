@@ -60,7 +60,7 @@ function Login() {
             console.error("Error al iniciar sesión:", err);
 
             if (err.response?.status === 401) {
-                setError("Credenciales incorrectas.");
+                setError("Contraseñá incorrecta.");
             } else if (err.response?.status === 404) {
                 setError("El correo electrónico no está registrado.");
             } else if (err.response?.status === 409 ) {
@@ -108,7 +108,6 @@ function Login() {
         validateToken(newToken.join(""));
     };
 
-    // Validar el token
     const validateToken = async (token: string) => {
         setLoading(true);
         setError("");
@@ -118,9 +117,14 @@ function Login() {
             console.log("Respuesta de la API:", response);
             setVerified(true); // Mostrar mensaje de "Cuenta verificada"
             setError(""); // Limpiar errores previos
+    
+            // Recargar la página después de 2 segundos
+            setTimeout(() => {
+                window.location.reload(); // Recargar la página
+            }, 500);
         } catch (err: any) {
             console.error("Error al confirmar usuario:", err);
-            setError(err.response?.data?.message || "Error al confirmar usuario.");
+            setError(err.response?.data?.message || "Error al confirmar usuario Token invalido.");
             setToken(Array(6).fill("")); // Limpiar los campos
             inputRefs.current[0]?.focus(); // Enfocar el primer input
         } finally {
@@ -129,12 +133,7 @@ function Login() {
     };
     
     // Función para regresar al formulario de login
-    const handleBackToLogin = () => {
-        setUnconfirmedUser(false); // Ocultar el formulario de token
-        setVerified(false); // Reiniciar el estado de verificación
-        setToken(Array(6).fill("")); // Limpiar el token
-    };
-
+  
     // Función para reenviar el token de confirmación
     const handleResendToken = async () => {
         try {
@@ -227,6 +226,14 @@ function Login() {
                                 Regístrate Aquí
                             </span>
                         </div>
+                        
+                        <div className="mt-4 text-sm">
+                            ¿Olvidaste tu contraseña?{" "}
+                    <span className="text-green-300 hover:underline cursor-pointer" onClick={() => navigate("/Change")} >
+                            Cambiar contraseña
+                    </span>
+</div>
+ 
                     </>
                 ) : (
                     <>
@@ -260,15 +267,7 @@ function Login() {
         )}
 
         {/* Botón para regresar al login */}
-        {verified && (
-            <button
-                type="button"
-                onClick={handleBackToLogin}
-                className="cursor-pointer bg-white/20 w-full text-white rounded-md mt-6 text-lg p-2 hover:opacity-80"
-            >
-                Regresar al Login
-            </button>
-        )}
+       
 
         {/* Botón para reenviar el token */}
         {!verified && (
