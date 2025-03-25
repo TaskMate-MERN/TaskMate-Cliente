@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { createProject, getProjects } from "../../../api/projectServices"; // Importar las funciones del servicio
+import { createProject, getProjects } from "../../../api/projectServices";
+import Dashboard from "../../Dashboard/Dashboard";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate para la navegación
 
 interface Project {
   id: string;
@@ -12,6 +14,7 @@ export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [showForm, setShowForm] = useState(false);
   const [newProject, setNewProject] = useState({ title: "", client: "", description: "" });
+  const navigate = useNavigate(); // Hook para navegación
 
   // Cargar proyectos al montar el componente
   useEffect(() => {
@@ -35,27 +38,40 @@ export default function Projects() {
   const handleCreateProject = async () => {
     try {
       const createdProject = await createProject(newProject);
-      setProjects([...projects, createdProject]); // Agregar a la lista
-      setShowForm(false); // Ocultar el formulario
-      setNewProject({ title: "", client: "", description: "" }); // Reiniciar el formulario
+      setProjects([...projects, createdProject]); // Esto ya está correcto
+      setShowForm(false);
+      setNewProject({ title: "", client: "", description: "" });
+      
+      // Opcional: Recargar los proyectos desde el servidor para mayor consistencia
+      const updatedProjects = await getProjects();
+      setProjects(updatedProjects);
     } catch (error) {
       console.error("Error al crear el proyecto:", error);
     }
   };
 
+  // Navegar a la página de detalle del proyecto
+  const handleViewProject = (project: Project) => {
+    navigate('/workspace', { 
+      state: { 
+        currentProject: project 
+      } 
+    });
+  };
+
   return (
     <div className="p-8">
-      <h1 className="text-4xl font-bold text-purple-900">My Projects</h1>
+      <h1 className="text-4xl font-bold text-purple-900 mb-4">My Projects</h1>
       
       <button 
-        className="bg-purple-600 text-white px-4 py-2 rounded mt-4"
+        className="bg-purple-600 text-white px-4 py-2 rounded-full"
         onClick={() => setShowForm(true)}
       >
         New Project
       </button>
 
       {showForm && (
-        <div className="mt-4 p-4 border rounded shadow-lg bg-white">
+        <div className="mt-4 p-4 border rounded-lg shadow-lg bg-white">
           <h2 className="text-xl font-bold">Crear Proyecto</h2>
           <input 
             type="text" 
@@ -90,12 +106,18 @@ export default function Projects() {
       )}
 
       {projects.length > 0 ? (
-        <div className="mt-6">
+        <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {projects.map((project) => (
-            <div key={project.id} className="p-4 border-b">
+            <div key={project.id} className="p-4 border rounded-lg shadow-md hover:shadow-lg transition-shadow">
               <h2 className="text-lg font-bold">{project.title}</h2>
-              <p>{project.client}</p>
-              <p>{project.description}</p>
+              <p className="text-gray-600">{project.client}</p>
+              <p className="text-gray-500 mt-2 line-clamp-2">{project.description}</p>
+              <button
+  onClick={() => handleViewProject(project)}
+  className="mt-4 bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+>
+  Ver Proyecto
+</button>
             </div>
           ))}
         </div>

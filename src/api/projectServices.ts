@@ -9,7 +9,7 @@ const api = axios.create({
 api.interceptors.request.use((config) => {
     let token = localStorage.getItem("token");
 
-    // Verificar si el token es JSON y extraerlo
+    // Verificar si el token es JSON y extraerloB
     if (token) {
         try {
             const parsedToken = JSON.parse(token);
