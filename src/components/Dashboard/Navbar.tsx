@@ -22,7 +22,7 @@ export default function Navbar() {
             {/* Enlaces centrados */}
             <div className="flex justify-center space-x-6">
                 <a href="/workspace" className="hover:text-gray-300">WorkSpace</a>
-                <a href="#" className="hover:text-gray-300">Projects</a>
+                <a href="/dash" className="hover:text-gray-300">Projects</a>
             </div>
 
             {/* Íconos a la derecha */}
