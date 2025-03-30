@@ -67,3 +67,22 @@ export const fetchTasks = async (projectId: string) => {
     const response = await api.get(`/task/${projectId}`);
     return response.data;
 };
+
+// Nuevas funciones para el perfil del usuario
+export const getProfile = async () => {
+    try {
+        const response = await api.get("/get-profile");
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+};
+
+export const updateProfile = async (name: string) => {
+    try {
+        const response = await api.put("/update-profile", { name });
+        return response.data;
+    } catch (error) {
+        throw error;
+    }
+}; 

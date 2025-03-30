@@ -5,7 +5,7 @@ import TheDashboard from "./components/Dashboard/Dashboard";
 import Dashboard from "./components/Dashboard_Principal/dashboard";
 import CreateUser from "./components/CreateUser/create_user";
 import Cambiar from "./components/Change_pass/Change_pass";
-
+import Profile from "./components/Dashboard_Principal/profile"
 const router = () => {
     return (
         <BrowserRouter>
@@ -24,6 +24,11 @@ const router = () => {
                  <Route path="/Create" element={<AuthLayout />}>
                     {/* Aqui pondran todas sus rutas del Login, Register, etc... */}
                     <Route index element={<CreateUser />} />
+                </Route>
+
+                <Route path="/profile" element={<AuthLayout />}>
+                    {/* Aqui pondran todas sus rutas del Login, Register, etc... */}
+                    <Route index element={<Profile />} />
                 </Route>
 
                 <Route path="/Change" element={<AuthLayout />}>

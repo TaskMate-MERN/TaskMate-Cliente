@@ -22,13 +22,12 @@ export default function Navbar() {
             {/* Enlaces centrados */}
             <div className="flex justify-center space-x-6">
                 <a href="/workspace" className="hover:text-gray-300">WorkSpace</a>
-                <a href="#" className="hover:text-gray-300">Projects</a>
+                <a href="/dash" className="hover:text-gray-300">Projects</a>
             </div>
 
             {/* Íconos a la derecha */}
             <div className="flex justify-end space-x-4 relative">
-                <FaSearch className="cursor-pointer text-2xl" />
-                <FaBell className="cursor-pointer text-2xl" />
+             
                 {/* Ícono de usuario con menú desplegable */}
                 <div className="relative">
                     <FaUserCircle
@@ -58,4 +57,4 @@ export default function Navbar() {
             </div>
         </nav>
     );
-}
+} 
