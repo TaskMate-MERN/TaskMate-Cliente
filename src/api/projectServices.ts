@@ -23,7 +23,7 @@ export const projectService = {
   createProject: async (projectData: {
     title: string;
     client: string;
-    description: string;
+    description: string; 
   }) => {
     const response = await api.post("/create-project", projectData);
     return response.data;
